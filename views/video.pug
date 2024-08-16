@@ -1,0 +1,60 @@
+extends common/layout
+
+block layout-content
+    script(type="text/javascript", src="/scripts/videoEventListeners.js")
+    main 
+        section.col.video-results
+            div.ratio.ratio-16x9
+                iframe(src=data.videoURL, frameborder="0")
+            div.container.video-data
+                h2#title #{data.title}
+                p#description !{data.description}
+        section.col
+            div#ingredientTags 
+                div.search-title
+                    label#dish-label(for="dish") Dish
+                    input(aria-label="Dish name" type="text" id="dish" name="dish" placeholder=data.title)
+                    label(for="dish" aria-hidden="true")
+                        i.fa-solid.fa-pen 
+                div.search-ingredients
+                    div.d-flex(aria-label="Add search ingredients")
+                        select#mode.form-select(name="mode")
+                            option(value="included") Include
+                            option(value="excluded") Exclude
+                        input.flex-grow-1(type="text" id="ingredient" name="ingredient" placeholder="Add Ingredient")
+                        button.btn.primary-button(id="add") Add
+                    div#ingredients
+                        each ingredient in data.included
+                            div.ingredientTag(id=ingredient)
+                                p.tag-name #{decodeURI(ingredient)}
+                                button.remove-btn(value = ingredient)
+                                    i.fa-solid.fa-xmark(aria-label="remove search ingredient")
+                        each ingredient in data.excluded
+                            div.ingredientTag.excluded(id=ingredient)
+                                p.tag-name #{decodeURI(ingredient)}
+                                button.remove-btn(value = ingredient)
+                                    i.fa-solid.fa-xmark(aria-label="remove search ingredient")
+                button.btn.primary-button(id="submit") Find Recipes
+            div.container
+                    h3.search-results #{data.results}
+            div#recipes
+                each recipe in data.recipes
+                    div.container(id=recipe.id)
+                        div.row
+                            h3 #{recipe.title}
+                        div.recipe-info
+                            div.recipe-img
+                                img(src=recipe.image alt=`Picture of ${recipe.title}`)
+                            div.recipe-data
+                                div.recipe-stats
+                                    h4
+                                        i.fa-solid.fa-utensils
+                                        | #{recipe.serving} serving(s)
+                                    h4
+                                        i.fa-solid.fa-clock
+                                        | #{recipe.time} mins
+                                    h4 
+                                        i.fa-solid.fa-arrow-up-right-from-square
+                                        a(href=recipe.url)  #{recipe.domain}
+                                div.recipe-summary
+                                    p !{recipe.summary}

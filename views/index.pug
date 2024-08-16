@@ -1,0 +1,11 @@
+extends common/layout
+
+block layout-content
+  main.splash
+    div.splash-content
+      div.tag-line
+        h2 Discover Your Next Favorite Dish - Inspired by Your Favorite Recipe Videos!
+      div.youtube-input.d-flex
+        input.flex-grow-1(aria-label="Enter Youtube URL for Recipe" type="text" id="search" name="search" placeholder="Enter YouTube URL" value="https://www.youtube.com/watch?v=QZloaLmvSP0")
+        button.parse.btn.primary-button(onclick="analyzeURL(event)") Analyze Video
+      

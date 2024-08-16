@@ -1,0 +1,11 @@
+header
+  nav.header-bar
+    a.navbar-brand(href="/")
+      h1 
+        span.logo Chew
+        | Tube
+    div.youtube-input.d-flex
+      input.flex-grow-1(aria-label="Enter Youtube URL for Recipe" type="text" id="header-search" name="header-search" placeholder="Enter YouTube URL")
+      button.parse.btn.primary-button(aria-label="Analyze Youtube URL" onclick="analyzeURL(event)")
+        i.fa-solid.fa-play
+
